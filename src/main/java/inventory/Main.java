@@ -19,7 +19,18 @@ public class Main {
         System.out.println(repo.findAll());
         repo.deleteById("002394");
         System.out.println(repo.findAll());
+        System.out.println(Collections.max(repo.findAll()));
+        System.out.println(max(repo.findAll()));
 
+    }
 
+    static <T extends Comparable<T>> T max(List<T> list) {
+        T max = list.getFirst();
+        for (T element : list) {
+            if (element.compareTo(max) > 0) {
+                max = element;
+            }
+        }
+        return max;
     }
 }
