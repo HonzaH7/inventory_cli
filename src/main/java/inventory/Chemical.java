@@ -55,6 +55,10 @@ public class Chemical implements Comparable<Chemical> {
         return category;
     }
 
+    public double getConcentration() {
+        return concentration;
+    }
+
     @Override
     public int compareTo(Chemical o) {
         return this.id.compareTo(o.getId());

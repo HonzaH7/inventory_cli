@@ -1,9 +1,6 @@
 package inventory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryRepository<ID, T> implements Repository<ID, T>{
     private final Map<ID, T> repo = new HashMap<>();
@@ -14,8 +11,8 @@ public class InMemoryRepository<ID, T> implements Repository<ID, T>{
     }
 
     @Override
-    public T findById(ID id) {
-        return repo.get(id);
+    public Optional<T> findById(ID id) {
+        return Optional.ofNullable(repo.get(id));
     }
 
     @Override
