@@ -1,5 +1,7 @@
 package inventory;
 
+import inventory.util.ChemicalNotFoundException;
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -19,6 +21,13 @@ public class Main {
         repo.save(HCl.getId(), HCl);
         repo.save(H2SO4.getId(), H2SO4);
         repo.save(NaCl.getId(), NaCl);
+
+        Chemical mustExist = repo.findById("012394")
+                        .orElseThrow(() -> new ChemicalNotFoundException("Chemical 012394 not found"));
+        System.out.println("Found: " + mustExist.getName());
+
+        //Chemical missing = repo.findById("nenene").orElseThrow(() -> new ChemicalNotFoundException("Chemical nenene not found"));
+
 
         repo.findById("012394").ifPresent(System.out::println);
         repo.findById("idk?").ifPresentOrElse(System.out::println, () -> System.out.println("Not found"));

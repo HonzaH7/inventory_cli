@@ -1,5 +1,7 @@
 package inventory;
 
+import inventory.util.InvalidChemicalException;
+
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,11 +14,21 @@ public class Chemical implements Comparable<Chemical> {
     private final Set<Hazard> hazards;
 
     public Chemical(String name, String id, Category category, double concentration, Set<Hazard> hazards) {
+        if (concentration < 0) {
+            throw new InvalidChemicalException("Concentration cannot be negative (" + concentration + ").");
+        }
+        if (name == null || name.isBlank()) {
+            throw new InvalidChemicalException("Name cannot be null or blank");
+        }
+        if (id == null || id.isBlank()) {
+            throw new InvalidChemicalException("Id cannot be null or blank");
+        }
+
         this.name = name;
         this.id = id;
-        this.category = category;
+        this.category = Objects.requireNonNull(category, "Category cannot be null.");
         this.concentration = concentration;
-        this.hazards = EnumSet.copyOf(hazards);
+        this.hazards = EnumSet.copyOf(Objects.requireNonNull(hazards, "Hazards cannot be null"));
 
     }
 
