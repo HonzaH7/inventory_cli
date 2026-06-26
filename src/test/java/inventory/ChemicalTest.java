@@ -2,13 +2,14 @@ package inventory;
 
 import inventory.util.InvalidChemicalException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ChemicalTest {
 
@@ -25,17 +26,35 @@ class ChemicalTest {
 
     @Test
     void nullIdThrows() {
-        assertThrows(InvalidChemicalException.class, () -> new Chemical("NaOH", null, Category.BASE, 1, EnumSet.noneOf(Hazard.class)));
+        assertThrows(InvalidChemicalException.class, () -> new Chemical(
+                "NaOH",
+                null,
+                Category.BASE,
+                1,
+                EnumSet.noneOf(Hazard.class)
+        ));
     }
 
-    @Test
-    void negativeConcentrationThrows() {
-        assertThrows(InvalidChemicalException.class, () -> new Chemical("NaOH", "28282", Category.BASE, -1, EnumSet.noneOf(Hazard.class)));
+    @ParameterizedTest
+    @ValueSource(doubles = {0, 0.5, 100})
+    void acceptsValidConcentration(double concentration) {
+        assertDoesNotThrow(
+                () -> new Chemical("NaOH", "002394", Category.BASE, concentration,
+                        EnumSet.noneOf(Hazard.class)));
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {-0.01, -1})
+    void rejectsNegativeConcentration(double concentration) {
+        assertThrows(InvalidChemicalException.class,
+                () -> new Chemical("NaOH", "002394", Category.BASE, concentration,
+                        EnumSet.noneOf(Hazard.class)));
     }
 
     @Test
     void blankNameThrows() {
-        assertThrows(InvalidChemicalException.class, () -> new Chemical("", "28282", Category.BASE, 1, EnumSet.noneOf(Hazard.class)));
+        assertThrows(InvalidChemicalException.class, () -> new Chemical("", "28282", Category.BASE, 1,
+                EnumSet.noneOf(Hazard.class)));
     }
 
 }
