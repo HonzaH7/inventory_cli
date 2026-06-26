@@ -1,6 +1,7 @@
 package inventory;
 
 import inventory.util.InvalidChemicalException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ChemicalTest {
 
+    @DisplayName("Two chemicals with same id collapse to one in a HashSet")
     @Test
     void sameIdMeansOneElementInSet() {
         Chemical NaOH = new Chemical("NaOH", "002394", Category.BASE, 1, EnumSet.of(Hazard.CORROSIVE, Hazard.ETCHING));
