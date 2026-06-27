@@ -1,8 +1,8 @@
-package inventory;
+package inventory.repository;
 
 import java.util.*;
 
-public class InMemoryRepository<ID, T> implements Repository<ID, T>{
+public class InMemoryRepository<ID, T> implements Repository<ID, T> {
     private final Map<ID, T> repo = new HashMap<>();
 
     @Override

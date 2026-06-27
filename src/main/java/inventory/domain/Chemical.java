@@ -1,6 +1,6 @@
-package inventory;
+package inventory.domain;
 
-import inventory.util.InvalidChemicalException;
+import inventory.exception.InvalidChemicalException;
 
 import java.util.EnumSet;
 import java.util.Objects;

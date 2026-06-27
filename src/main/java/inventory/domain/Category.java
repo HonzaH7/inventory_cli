@@ -1,4 +1,4 @@
-package inventory;
+package inventory.domain;
 
 public enum Category {
     ACID,

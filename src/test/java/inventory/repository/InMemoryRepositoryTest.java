@@ -1,5 +1,8 @@
-package inventory;
+package inventory.repository;
 
+import inventory.domain.Category;
+import inventory.domain.Chemical;
+import inventory.domain.Hazard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

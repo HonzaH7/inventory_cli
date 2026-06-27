@@ -1,6 +1,6 @@
-package inventory;
+package inventory.domain;
 
-import inventory.util.InvalidChemicalException;
+import inventory.exception.InvalidChemicalException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

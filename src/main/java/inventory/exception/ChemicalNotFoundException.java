@@ -1,4 +1,4 @@
-package inventory.util;
+package inventory.exception;
 
 public class ChemicalNotFoundException extends InventoryException{
     public ChemicalNotFoundException(String message) {

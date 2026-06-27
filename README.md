@@ -31,11 +31,11 @@ core Java: collections, generics, streams, records/enums, exceptions and testing
 
 ### Run the application
 
-Run the `inventory.Main` class from your IDE, or from the command line:
+Run the `inventory.cli.Main` class from your IDE, or from the command line:
 
 ```bash
 ./mvnw compile
-java -cp target/classes inventory.Main
+java -cp target/classes inventory.cli.Main
 ```
 
 ## Example session
