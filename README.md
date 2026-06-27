@@ -72,19 +72,16 @@ Error: Unknown category: plasma
 
 ## Design highlights
 
-A few decisions that show the thinking behind the code:
+Patterns and principles applied:
 
-- **Generic repository** — `Repository<ID, T>` with an in-memory implementation
-  (`InMemoryRepository`) backed by a `Map`. Reusable for any entity type, not just chemicals.
-- **`Chemical` as an immutable entity** — `equals`/`hashCode` are based only on the
-  catalog ID (entity identity), all fields are `final`, and the mutable hazard set is
-  defensively copied in and out so the object can never be changed after construction.
-- **`Optional` instead of `null`** — `findById` returns `Optional<Chemical>`, forcing
-  callers to handle the "not found" case explicitly.
-- **Custom exception hierarchy** — `InventoryException` → `InvalidChemicalException` /
-  `ChemicalNotFoundException`, with cause chaining, all handled at the CLI boundary.
-- **Modern Java domain model** — `enum` with fields/methods (`Hazard`), `EnumSet` for
-  hazard flags, and a `sealed` interface (`StorageLocation`) with pattern-matching `switch`.
+- **Repository pattern** — generic `Repository<ID, T>` + in-memory implementation
+- **Dependency injection** — repository injected into `Cli`; `Main` as composition root
+- **Layered packages** — `domain` · `repository` · `cli` · `exception`
+- **Single Responsibility** — UI, parsing, domain, and storage each isolated
+- **Immutable entity** — `Chemical`: `final` fields, defensive copies, identity by ID
+- **Custom exception hierarchy** — with cause chaining, handled at the CLI boundary
+- **`Optional`** over `null` for lookups
+- **Modern Java** — generics, `enum` / `EnumSet`
 
 ## Unit tests
 
